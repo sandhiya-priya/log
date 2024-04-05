@@ -1,0 +1,28 @@
+   public void WriteLogNse(string log)
+        {
+
+            try
+            {
+
+                //string filepath = HttpContext.Current.Server.MapPath("/nsdl/Log/");
+                string filepath = System.Web.Hosting.HostingEnvironment.MapPath("~/UPIDtlLog/NseDpStatusLog/");
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+
+                }
+
+                StreamWriter sw = new StreamWriter(filepath + DateTime.Now.ToString("ddMMyy") + ".txt", true);
+
+                sw.WriteLine(DateTime.Now.ToString() + " " + log);
+                sw.WriteLine("---------------------------------------------------------------------------------------------------------");
+                sw.Close();
+
+            }
+
+            catch (Exception Ex)
+            {
+                string str = Ex.ToString();
+            }
+
+        }
