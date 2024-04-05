@@ -1,0 +1,339 @@
+ public static class NSE_ExceptionLogging
+    {
+
+        private static String ErrorlineNo, Errormsg, extype, exurl, hostIp, ErrorLocation, HostAdd;
+
+        public static void NSE_SendErrorToText(string resp)
+        {
+            var line = Environment.NewLine + Environment.NewLine;
+
+            try
+            {
+                string filepath = HttpContext.Current.Server.MapPath("~/NSELogg/");  //Text File Path
+
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+
+                }
+                filepath = filepath + "IPOMaster" + DateTime.Today.ToString("dd-MM-yy") + ".txt";   //Text File Name
+                if (!File.Exists(filepath))
+                {
+                    File.Create(filepath).Dispose();
+                }
+                using (StreamWriter sw = File.AppendText(filepath))
+                {
+                    string message = Environment.NewLine;
+                    message += "DataTime:" + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") + "," + resp;
+                    message += Environment.NewLine;
+                    sw.WriteLine(message);
+                    sw.Flush();
+                    sw.Close();
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+
+            }
+        }
+        public static void uservalidationcancel_log(string clname, string clpan,string dpid, string clupiid,string logfor)
+        {
+            var line = Environment.NewLine + Environment.NewLine;
+
+            try
+            {
+                string filepath = HttpContext.Current.Server.MapPath("~/uservalidationcancel_log/");  //Text File Path
+
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+
+                }
+                filepath = filepath + "IPOMaster" + DateTime.Today.ToString("dd-MM-yy") + ".txt";   //Text File Name
+                if (!File.Exists(filepath))
+                {
+                    File.Create(filepath).Dispose();
+                }
+                using (StreamWriter sw = File.AppendText(filepath))
+                {
+                    if (logfor.ToLower() =="applycancel") {
+                    string message = Environment.NewLine;
+                    message += "DataTime:" + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") + " :  " + "User apply the IPO But Confirmation Cancel";
+                    message += Environment.NewLine;
+                    message += "Client Name  :  " + " " + clname;
+                    message += Environment.NewLine;
+                    message += "Client PanNo : " + "  " + clpan;
+                    message += Environment.NewLine;
+                    message += "Client DP Id : " + "  " + dpid;
+                    message += Environment.NewLine;
+                    message += "Client UpiId : " + "  " + clupiid;
+                    message += Environment.NewLine;
+                    sw.WriteLine(message);
+                    sw.Flush();
+                    sw.Close();
+                    }
+                    else
+                    {
+                        string message = Environment.NewLine;
+                        message += "DataTime:" + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") + " :  " + "User Cancel the IPO ";
+                        message += Environment.NewLine;
+                        message += "Client Name  :  " + " " + clname;
+                        message += Environment.NewLine;
+                        message += "Client PanNo : " + "  " + clpan;
+                        message += Environment.NewLine;
+                        message += "Client DP Id : " + "  " + dpid;
+                        message += Environment.NewLine;
+                        message += "Client UpiId : " + "  " + clupiid;
+                        message += Environment.NewLine;
+                        sw.WriteLine(message);
+                        sw.Flush();
+                        sw.Close();
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+
+            }
+        }
+        public static void uservalidationconfirm_log(string clname, string clpan, string dpid, string clupiid,string logfor)
+        {
+            var line = Environment.NewLine + Environment.NewLine;
+
+            try
+            {
+                string filepath = HttpContext.Current.Server.MapPath("~/uservalidationconfirm_log/");  //Text File Path
+
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+
+                }
+                filepath = filepath + "IPOMaster" + DateTime.Today.ToString("dd-MM-yy") + ".txt";   //Text File Name
+                if (!File.Exists(filepath))
+                {
+                    File.Create(filepath).Dispose();
+                }
+                using (StreamWriter sw = File.AppendText(filepath))
+                {
+                    if (logfor.ToLower() =="apply") { 
+                    string message = Environment.NewLine;
+                    message += "DataTime:" + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") + " :  " + "User apply the IPO and validate the Confirmation Form";
+                    message += Environment.NewLine;
+                    message += "Client Name  :  " + " " + clname;
+                    message += Environment.NewLine;
+                    message += "Client PanNo : " + "  " + clpan;
+                    message += Environment.NewLine;
+                    message += "Client DP Id : " + "  " + dpid;
+                    message += Environment.NewLine;
+                    message += "Client UpiId : " + "  " + clupiid;
+                    message += Environment.NewLine;
+                    sw.WriteLine(message);
+                    sw.Flush();
+                    sw.Close();
+                    }
+                    else
+                    {
+                        string message = Environment.NewLine;
+                        message += "DataTime:" + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") + " :  " + "User Modify the IPO and validate the Confirmation Form";
+                        message += Environment.NewLine;
+                        message += "Client Name  :  " + " " + clname;
+                        message += Environment.NewLine;
+                        message += "Client PanNo : " + "  " + clpan;
+                        message += Environment.NewLine;
+                        message += "Client DP Id : " + "  " + dpid;
+                        message += Environment.NewLine;
+                        message += "Client UpiId : " + "  " + clupiid;
+                        message += Environment.NewLine;
+                        sw.WriteLine(message);
+                        sw.Flush();
+                        sw.Close();
+
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+
+            }
+        }
+        public static void Singlsignon_log(string resp)
+        {
+            var line = Environment.NewLine + Environment.NewLine;
+
+            try
+            {
+                string filepath = HttpContext.Current.Server.MapPath("~/singlsignon_log/");  //Text File Path
+
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+
+                }
+                filepath = filepath + "singlsignon_log" + DateTime.Today.ToString("dd-MM-yy") + ".txt";   //Text File Name
+                if (!File.Exists(filepath))
+                {
+                    File.Create(filepath).Dispose();
+                }
+                using (StreamWriter sw = File.AppendText(filepath))
+                {
+                    string message = Environment.NewLine;
+                    message += "DataTime:" + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") + "   " + resp;
+                    message += Environment.NewLine;
+                    sw.WriteLine(message);
+                    sw.Flush();
+                    sw.Close();
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+
+            }
+        }
+
+        public static void NSE_SendErrorToText(string resp, string status)
+        {
+            var line = Environment.NewLine + Environment.NewLine;
+
+            try
+            {
+                string filepath = HttpContext.Current.Server.MapPath("~/NSELogg/");  //Text File Path
+
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+
+                }
+                filepath = filepath + "IPOMaster" + DateTime.Today.ToString("dd-MM-yy") + ".txt";   //Text File Name
+                if (!File.Exists(filepath))
+                {
+                    File.Create(filepath).Dispose();
+                }
+                using (StreamWriter sw = File.AppendText(filepath))
+                {
+                    string message = "DataTime" + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") + "," + "Response :" + resp + "," + "Status" + status;
+                    message += Environment.NewLine;
+                    sw.WriteLine(message);
+                    sw.Flush();
+                    sw.Close();
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+
+            }
+        }
+
+        public static void NSE_errorlog(string req, string page)
+        {
+            var line = Environment.NewLine + Environment.NewLine;
+            try
+            {
+                string filepath = HttpContext.Current.Server.MapPath("~/ErrorLog/");  //Text File Path
+
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+
+                }
+                filepath = filepath + DateTime.Today.ToString("dd-MM-yy") + ".txt";   //Text File Name
+                if (!File.Exists(filepath))
+                {
+
+
+                    File.Create(filepath).Dispose();
+
+                }
+                using (StreamWriter sw = File.AppendText(filepath))
+                {
+                    string message = string.Format("Time: {0}", DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"));
+                    message += Environment.NewLine;
+                    message += "--------------------------Hit Page---------------------------------";
+                    message += Environment.NewLine;
+                    message += string.Format("{0}", page);
+                    message += Environment.NewLine;
+                    message += "--------------------------Input Content---------------------------------";
+                    message += Environment.NewLine;
+                    message += string.Format("{0}", req);
+                    message += Environment.NewLine;
+                    sw.WriteLine(message);
+                    sw.Flush();
+                    sw.Close();
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+
+            }
+        }
+
+        public static void NSE_MissingErrorCode(string symbolapp, string codedescription)
+        {
+            var line = Environment.NewLine + Environment.NewLine;
+
+
+
+            try
+            {
+                string filepath = HttpContext.Current.Server.MapPath("~/StatusErrorLog/");  //Text File Path
+
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+
+                }
+                filepath = filepath + DateTime.Today.ToString("MissingErrorCode_dd-MM-yy") + ".txt";   //Text File Name
+                if (!File.Exists(filepath))
+                {
+
+
+                    File.Create(filepath).Dispose();
+
+                }
+                using (StreamWriter sw = File.AppendText(filepath))
+                {
+                    string message = string.Format("Time: {0}", DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"));
+                    message += Environment.NewLine;
+                    message += "--------------------------Symbol|ApplicationNo---------------------------------";
+                    message += Environment.NewLine;
+                    message += string.Format("{0}", symbolapp);
+                    message += Environment.NewLine;
+                    message += "--------------------------ErrorCode|Message---------------------------------";
+                    message += Environment.NewLine;
+                    message += string.Format("{0}", codedescription);
+                    message += Environment.NewLine;
+
+                    sw.WriteLine(message);
+                    sw.Flush();
+                    sw.Close();
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+
+            }
+        }
+
+
+
+    }
