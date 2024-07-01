@@ -1,0 +1,151 @@
+1) Common Class Create a Log :
+
+
+  public static void SendErrorToText(string req, string res, string rest)
+        {
+            var line = Environment.NewLine + Environment.NewLine;
+
+
+
+            try
+            {
+                string filepath = HttpContext.Current.Server.MapPath("~/UPIDtlLog/");  //Text File Path
+
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+
+                }
+                filepath = filepath + DateTime.Today.ToString("dd-MM-yy") + ".txt";   //Text File Name
+                if (!File.Exists(filepath))
+                {
+
+
+                    File.Create(filepath).Dispose();
+
+                }
+                using (StreamWriter sw = File.AppendText(filepath))
+                {
+                    string message = string.Format("Time: {0}", DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"));
+                    message += Environment.NewLine;
+                    message += "--------------------------API URL---------------------------------";
+                    message += Environment.NewLine;
+                    message += string.Format("{0}", rest);
+                    message += Environment.NewLine;
+                    message += "--------------------------Request Parameter---------------------------------";
+                    message += Environment.NewLine;
+                    message += string.Format("{0}", req);
+                    message += Environment.NewLine;
+                    message += Environment.NewLine;
+                    message += "--------------------------Response Parameter---------------------------------";
+                    message += Environment.NewLine;
+                    message += string.Format("{0}", res);
+                    message += Environment.NewLine;
+                    sw.WriteLine(message);
+                    sw.Flush();
+                    sw.Close();
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+
+            }
+        }
+
+-------------------------------------------------------------------
+
+2) How to craete a Service.svc page :
+
+
+  public void WriteLogUpiNse(string log)
+        {
+
+            try
+            {
+                 
+                string filepath = System.Web.Hosting.HostingEnvironment.MapPath("~/UPIDtlLog/NseUpiStatusLog/");
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+
+                }
+
+                StreamWriter sw = new StreamWriter(filepath + DateTime.Now.ToString("ddMMyy") + ".txt", true);
+
+                sw.WriteLine(DateTime.Now.ToString() + " " + log);
+                sw.WriteLine("---------------------------------------------------------------------------------------------------------");
+                sw.Close();
+
+            }
+
+            catch (Exception Ex)
+            {
+                string str = Ex.ToString();
+            }
+
+        }
+
+--------------------------------------------------------------------------------------------------
+
+3) create a Log for EXE page :
+
+    public static void SendErrorToText(string req, string res, string rest)
+        {
+            var line = Environment.NewLine + Environment.NewLine;
+
+
+
+            try
+            {
+                //string source = Application.StartupPath;
+                string source = System.Windows.Forms.Application.StartupPath;
+                string filepath = source + "/UPIDtlLog/";
+                //string filepath = HttpContext.Current.Server.MapPath("~/UPIDtlLog/");  //Text File Path
+
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+
+                }
+                filepath = filepath + DateTime.Today.ToString("dd-MM-yy") + ".txt";   //Text File Name
+                if (!File.Exists(filepath))
+                {
+
+
+                    File.Create(filepath).Dispose();
+
+                }
+                using (StreamWriter sw = File.AppendText(filepath))
+                {
+                    string message = string.Format("Time: {0}", DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"));
+                    message += Environment.NewLine;
+                    message += "--------------------------API URL---------------------------------";
+                    message += Environment.NewLine;
+                    message += string.Format("{0}", rest);
+                    message += Environment.NewLine;
+                    message += "--------------------------Request Parameter---------------------------------";
+                    message += Environment.NewLine;
+                    message += string.Format("{0}", req);
+                    message += Environment.NewLine;
+                    message += Environment.NewLine;
+                    message += "--------------------------Response Parameter---------------------------------";
+                    message += Environment.NewLine;
+                    message += string.Format("{0}", res);
+                    message += Environment.NewLine;
+                    sw.WriteLine(message);
+                    sw.Flush();
+                    sw.Close();
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+
+            }
+        }
+
